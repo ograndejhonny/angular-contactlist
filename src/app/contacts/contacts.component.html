@@ -1,0 +1,45 @@
+<div class="form-group">
+  <label for="exampleInputEmail1">Name</label>
+  <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Name" [(ngModel)]="inputName"/>
+</div>
+<div class="form-group">
+  <label for="exampleInputEmail1">Telephone</label>
+  <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Telephone" [(ngModel)]="inputPhone"
+        (keyup.Enter)="insertContact()" />
+</div>
+
+<button [hidden]="contact != null" class="btn btn-primary" (click)="insertContact()">Insert</button>
+<button [hidden]="contact == null" class="btn btn-success" (click)="updateContact()">Update</button>
+<button [hidden]="contact == null" class="btn btn-warning" (click)="cancel()">Cancel</button>
+
+<br/>
+<br/>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Telephone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let s of contacts; let index=index ">
+      <th scope="row">{{index + 1}}</th>
+      <!--
+      <app-contact 
+        [contact]="s"
+        (contactDeleted)="delete(s)"> 
+      </app-contact>
+    -->
+      <td> {{s.name}} </td>
+      <td> {{s.phone}} </td>
+      <td>
+        <button type="button" class="btn btn-info" (click)="edit(s)">Edit</button>
+        &nbsp;
+        <button type="button" class="btn btn-danger" (click)="delete(s)">Remove</button>
+      </td>
+  </tr>
+</tbody>
+</table>
